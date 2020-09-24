@@ -91,10 +91,9 @@ static void step_cb_wrapper(void* ctx) {
 }
 
 
-// @brief Sets up all components of the axis,
-// such as gate driver and encoder hardware.
+// @brief Does Nothing
 void Axis::setup() {
-    motor_.setup();
+    // Does nothing - Motor and encoder setup called separately.
 }
 
 static void run_state_machine_loop_wrapper(void* ctx) {
@@ -241,9 +240,9 @@ bool Axis::run_lockin_spin(const LockinConfig_t &lockin_config) {
     float x = 0.0f;
     run_control_loop([&]() {
         float phase = wrap_pm_pi(lockin_config.ramp_distance * x);
-        float I_mag = lockin_config.current * x;
+        float torque = lockin_config.current * motor_.config_.torque_constant * x;
         x += current_meas_period / lockin_config.ramp_time;
-        if (!motor_.update(I_mag, phase, 0.0f))
+        if (!motor_.update(torque, phase, 0.0f))
             return false;
         return x < 1.0f;
     });
@@ -272,7 +271,7 @@ bool Axis::run_lockin_spin(const LockinConfig_t &lockin_config) {
         distance += vel * current_meas_period;
         phase = wrap_pm_pi(phase + vel * current_meas_period);
 
-        if (!motor_.update(lockin_config.current, phase, vel))
+        if (!motor_.update(lockin_config.current * motor_.config_.torque_constant, phase, vel))
             return false;
         return !spin_done(true); //vel_override to go to next phase
     });
@@ -288,7 +287,7 @@ bool Axis::run_lockin_spin(const LockinConfig_t &lockin_config) {
             distance += vel * current_meas_period;
             phase = wrap_pm_pi(phase + vel * current_meas_period);
 
-            if (!motor_.update(lockin_config.current, phase, vel))
+            if (!motor_.update(lockin_config.current * motor_.config_.torque_constant, phase, vel))
                 return false;
             return !spin_done();
         });
@@ -562,7 +561,7 @@ void Axis::run_state_machine_loop() {
                 if (status) {
                     // call to controller.reset() that happend when arming means that vel_setpoint
                     // is zeroed. So we make the setpoint the spinup target for smooth transition.
-                    controller_.vel_setpoint_ = config_.sensorless_ramp.vel;
+                    controller_.vel_setpoint_ = config_.sensorless_ramp.vel / (2.0f * M_PI * motor_.config_.pole_pairs);
                     status = run_sensorless_control_loop();
                 }
             } break;
