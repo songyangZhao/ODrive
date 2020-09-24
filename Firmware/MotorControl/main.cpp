@@ -263,9 +263,11 @@ int odrive_main(void) {
     pwm_in_init();
 
     // Setup hardware for all components
-    for (size_t i = 0; i < AXIS_COUNT; ++i) {
-        axes[i]->setup();
-    }
+    // for (size_t i = 0; i < AXIS_COUNT; ++i) {
+    //     axes[i]->setup();
+    // }
+    axes[0]->setup();
+    // axes[1]->setup();
 
     for(auto& axis : axes){
         axis->encoder_.setup();

@@ -16,6 +16,8 @@
 	"settings": {
 		"c-cpp-flylint.cppcheck.standard": ["c99","c++14"],
 		"files.associations": {
+			"*.proto": "VRML",
+			"*.wbo": "VRML",
 			"*.config": "yaml",
 			"memory": "cpp",
 			"utility": "cpp",
@@ -62,7 +64,25 @@
 			"iomanip": "cpp",
 			"optional": "cpp",
 			"sstream": "cpp",
-			"utils.h": "c"
+			"utils.h": "c",
+			"atomic": "cpp",
+			"strstream": "cpp",
+			"bitset": "cpp",
+			"complex": "cpp",
+			"list": "cpp",
+			"mutex": "cpp",
+			"numeric": "cpp",
+			"ratio": "cpp",
+			"thread": "cpp",
+			"cfenv": "cpp",
+			"cinttypes": "cpp",
+			"typeindex": "cpp",
+			"iterator": "cpp",
+			"map": "cpp",
+			"memory_resource": "cpp",
+			"random": "cpp",
+			"set": "cpp",
+			"string": "cpp"
 		}
 	}
 }

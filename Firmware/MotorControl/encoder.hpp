@@ -18,7 +18,7 @@ public:
                                     // In this case the encoder will enter ready
                                     // state as soon as the index is found.
         bool zero_count_on_find_idx = true;
-        int32_t cpr = (2048 * 4);   // Default resolution of CUI-AMT102 encoder,
+        int32_t cpr = 4000;   // Default resolution of CUI-AMT102 encoder,
         int32_t offset = 0;        // Offset between encoder count and rotor electrical phase
         float offset_float = 0.0f; // Sub-count phase alignment offset
         bool enable_phase_interpolation = true; // Use velocity to interpolate inside the count state
@@ -29,7 +29,7 @@ public:
         bool find_idx_on_lockin_only = false; // Only be sensitive during lockin scan constant vel state
         bool idx_search_unidirectional = false; // Only allow index search in known direction
         bool ignore_illegal_hall_state = false; // dont error on bad states like 000 or 111
-        uint16_t abs_spi_cs_gpio_pin = 1;
+        uint16_t abs_spi_cs_gpio_pin = 3;
         uint16_t sincos_gpio_pin_sin = 3;
         uint16_t sincos_gpio_pin_cos = 4;
 

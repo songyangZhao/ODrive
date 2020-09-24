@@ -19,15 +19,15 @@ public:
     } Anticogging_t;
 
     struct Config_t {
-        ControlMode control_mode = CONTROL_MODE_POSITION_CONTROL;  //see: ControlMode_t
-        InputMode input_mode = INPUT_MODE_PASSTHROUGH;             //see: InputMode_t
-        float pos_gain = 20.0f;                  // [(turn/s) / turn]
-        float vel_gain = 1.0f / 6.0f;            // [Nm/(turn/s)]
+        ControlMode control_mode = CONTROL_MODE_VELOCITY_CONTROL;  //see: ControlMode_t
+        InputMode input_mode = INPUT_MODE_VEL_RAMP;             //see: InputMode_t
+        float pos_gain = 5.0f;                  // [(turn/s) / turn]
+        float vel_gain = 1.0f / 60.0f;            // [Nm/(turn/s)]
         // float vel_gain = 0.2f / 200.0f,       // [Nm/(rad/s)] <sensorless example>
-        float vel_integrator_gain = 2.0f / 6.0f; // [Nm/(turn/s * s)]
-        float vel_limit = 2.0f;                  // [turn/s] Infinity to disable.
+        float vel_integrator_gain = 2.0f / 60.0f; // [Nm/(turn/s * s)]
+        float vel_limit = 50.0f;                  // [turn/s] Infinity to disable.
         float vel_limit_tolerance = 1.2f;        // ratio to vel_lim. Infinity to disable.
-        float vel_ramp_rate = 1.0f;              // [(turn/s) / s]
+        float vel_ramp_rate = 3.0f;              // [(turn/s) / s]
         float torque_ramp_rate = 0.01f;          // Nm / sec
         bool circular_setpoints = false;
         float circular_setpoint_range = 1.0f; // Circular range when circular_setpoints is true. [turn]
@@ -38,7 +38,7 @@ public:
         float gain_scheduling_width = 10.0f;
         bool enable_gain_scheduling = false;
         bool enable_vel_limit = true;
-        bool enable_overspeed_error = true;
+        bool enable_overspeed_error = false;
         bool enable_current_mode_vel_limit = true;  // enable velocity limit in current control mode (requires a valid velocity estimator)
         uint8_t axis_to_mirror = -1;
         float mirror_ratio = 1.0f;

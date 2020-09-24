@@ -48,6 +48,12 @@ Axis::Axis(int axis_num,
     trap_traj_.axis_ = this;
     min_endstop_.axis_ = this;
     max_endstop_.axis_ = this;
+
+    // disable can heartbeat of axis1
+    if (axis_num == 1) {
+        config_.can_heartbeat_rate_ms = 0;
+    }
+
     decode_step_dir_pins();
     watchdog_feed();
 }
@@ -426,7 +432,7 @@ bool Axis::run_homing() {
     controller_.vel_setpoint_ = 0.0f;  // Change directions without decelerating
 
     // Set our current position in encoder counts to make control more logical
-    encoder_.set_linear_count((int32_t)controller_.pos_setpoint_);
+    encoder_.set_linear_count((int32_t)(controller_.pos_setpoint_ * encoder_.config_.cpr));
 
     controller_.config_.control_mode = Controller::CONTROL_MODE_POSITION_CONTROL;
     controller_.config_.input_mode = Controller::INPUT_MODE_TRAP_TRAJ;
