@@ -22,12 +22,12 @@ public:
         ControlMode control_mode = CONTROL_MODE_VELOCITY_CONTROL;  //see: ControlMode_t
         InputMode input_mode = INPUT_MODE_VEL_RAMP;             //see: InputMode_t
         float pos_gain = 5.0f;                  // [(turn/s) / turn]
-        float vel_gain = 1.0f / 60.0f;            // [Nm/(turn/s)]
+        float vel_gain = 1.0f / 80.0f;            // [Nm/(turn/s)]
         // float vel_gain = 0.2f / 200.0f,       // [Nm/(rad/s)] <sensorless example>
-        float vel_integrator_gain = 2.0f / 60.0f; // [Nm/(turn/s * s)]
-        float vel_limit = 50.0f;                  // [turn/s] Infinity to disable.
+        float vel_integrator_gain = 1.0f / 60.0f; // [Nm/(turn/s * s)]
+        float vel_limit = 30.0f;                  // [turn/s] Infinity to disable.
         float vel_limit_tolerance = 1.2f;        // ratio to vel_lim. Infinity to disable.
-        float vel_ramp_rate = 3.0f;              // [(turn/s) / s]
+        float vel_ramp_rate = 30.0f;              // [(turn/s) / s]
         float torque_ramp_rate = 0.01f;          // Nm / sec
         bool circular_setpoints = false;
         float circular_setpoint_range = 1.0f; // Circular range when circular_setpoints is true. [turn]
