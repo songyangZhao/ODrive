@@ -136,7 +136,7 @@ void Axis::load_default_step_dir_pin_config(
 }
 
 void Axis::load_default_can_id(const int& id, Config_t& config){
-    config.can_node_id = id;
+    config.can_node_id += id;
 }
 
 void Axis::decode_step_dir_pins() {
