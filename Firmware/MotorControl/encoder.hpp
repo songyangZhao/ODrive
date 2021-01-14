@@ -13,7 +13,7 @@ public:
     struct Config_t {
         Mode mode = MODE_SPI_ABS_AMS;
         bool use_index = false;
-        bool pre_calibrated = false; // If true, this means the offset stored in
+        bool pre_calibrated = true; // If true, this means the offset stored in
                                     // configuration is valid and does not need
                                     // be determined by run_offset_calibration.
                                     // In this case the encoder will enter ready
