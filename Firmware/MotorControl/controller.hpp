@@ -20,7 +20,7 @@ public:
 
     struct Config_t {
         ControlMode control_mode = CONTROL_MODE_POSITION_CONTROL;  //see: ControlMode_t
-        InputMode input_mode = INPUT_MODE_TRAP_TRAJ;             //see: InputMode_t
+        InputMode input_mode = INPUT_MODE_POS_FILTER;             //see: InputMode_t
         float pos_gain = 5.0f;                  // [(turn/s) / turn]
         float vel_gain = 1.0f / 6.0f;            // [Nm/(turn/s)]
         // float vel_gain = 0.2f / 200.0f,       // [Nm/(rad/s)] <sensorless example>

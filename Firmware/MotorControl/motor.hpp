@@ -39,7 +39,7 @@ public:
     // example: vel_gain is [V/(turn/s)] instead of [Nm/(turn/s)]
     // example: current_lim and calibration_current will instead determine the maximum voltage applied to the motor.
     struct Config_t {
-        bool pre_calibrated = false; // can be set to true to indicate that all values here are valid
+        bool pre_calibrated = true; // can be set to true to indicate that all values here are valid
         int32_t pole_pairs = 7;
         float calibration_current = 10.0f;    // [A]
         float resistance_calib_max_voltage = 2.0f; // [V] - You may need to increase this if this voltage isn't sufficient to drive calibration_current through the motor.
