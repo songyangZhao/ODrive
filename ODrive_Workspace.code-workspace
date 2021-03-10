@@ -83,7 +83,8 @@
 			"random": "cpp",
 			"set": "cpp",
 			"string": "cpp",
-			"math": "cpp"
+			"math": "cpp",
+			"*.ipp": "cpp"
 		}
 	}
 }
